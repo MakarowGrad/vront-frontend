@@ -1,0 +1,13 @@
+runtime: nodejs20
+build:
+  dockerfile: Dockerfile
+  env:
+    NODE_ENV: production
+run:
+  command: node server.js
+  env:
+    PORT: 3000
+    NODE_ENV: production
+healthCheck:
+  path: /
+  port: 3000

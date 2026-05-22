@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Next.js frontend (уже существующий)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://grpc:50051
+    depends_on:
+      - grpc
+    networks:
+      - app-network
+
+  # C++ gRPC backend
+  grpc:
+    build:
+      context: .
+      dockerfile: cpp_grpc_server/Dockerfile
+    ports:
+      - "50051:50051"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

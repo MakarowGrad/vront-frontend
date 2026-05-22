@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LUXURY FOOD DELIVERY - GLOBAL STYLES
+   ============================================ */
+
+/* Dark Theme (default) */
+:root,
+html.dark {
+  /* Background Colors */
+  --background: #0a0a0a;
+  --background-primary: #0a0a0a;
+  --background-secondary: #111111;
+  --background-tertiary: #1a1a1a;
+  --background-elevated: #1e1e1e;
+  --background-card: #252525;
+
+  /* Surface Colors */
+  --surface: #1e1e1e;
+  --surface-primary: #1e1e1e;
+  --surface-secondary: #252525;
+  --surface-tertiary: #2a2a2a;
+  --surface-hover: #303030;
+
+  /* Gold/Primary Colors */
+  --gold: #c9a962;
+  --gold-light: #d4b978;
+  --gold-dark: #b89a58;
+  --gold-muted: #8b7355;
+  
+  /* Foreground */
+  --foreground: #ffffff;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d4;
+  --text-tertiary: #a3a3a3;
+  --text-muted: #737373;
+  --text-disabled: #525252;
+
+  /* Border Colors */
+  --border: #2a2a2a;
+  --border-light: #3a3a3a;
+  --border-dark: #1a1a1a;
+}
+
+/* Light Theme */
+html.light {
+  --background: #FAF9F6;
+  --background-primary: #FAF9F6;
+  --background-secondary: #ffffff;
+  --background-tertiary: #f5f5f0;
+  --background-elevated: #ffffff;
+  --background-card: #f5f5f0;
+  
+  --surface: #f5f5f0;
+  --surface-primary: #f5f5f0;
+  --surface-secondary: #ffffff;
+  --surface-tertiary: #e8e8e3;
+  --surface-hover: #e0e0db;
+  
+  --gold: #C47E54;
+  --gold-light: #D4956A;
+  --gold-dark: #A66A44;
+  --gold-muted: #8b7355;
+  
+  /* Foreground */
+  --foreground: #2a2a2a;
+  
+  --text-primary: #2a2a2a;
+  --text-secondary: #666666;
+  --text-tertiary: #888888;
+  --text-muted: #999999;
+  --text-disabled: #bbbbbb;
+  
+  --border: #e0e0e0;
+  --border-light: #eeeeee;
+  --border-dark: #d0d0d0;
+}
+
+/* Custom Theme - Background Image with semi-transparent overlay */
+html.custom {
+  --background: rgba(10, 10, 10, 0.67);
+  --background-primary: rgba(10, 10, 10, 0.67);
+  --background-secondary: rgba(17, 17, 17, 0.67);
+  --background-tertiary: rgba(26, 26, 26, 0.67);
+  --background-elevated: rgba(30, 30, 30, 0.70);
+  --background-card: rgba(37, 37, 37, 0.88);
+  
+  --surface: rgba(30, 30, 30, 0.8);
+  --surface-primary: rgba(30, 30, 30, 0.8);
+  --surface-secondary: rgba(37, 37, 37, 0.82);
+  --surface-tertiary: rgba(42, 42, 42, 0.84);
+  --surface-hover: rgba(48, 48, 48, 0.86);
+  
+  --gold: #C47E54;
+  --gold-light: #D4956A;
+  --gold-dark: #A66A44;
+  --gold-muted: #8b7355;
+  
+  /* Foreground */
+  --foreground: #ffffff;
+  
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-tertiary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --text-disabled: rgba(255, 255, 255, 0.4);
+  
+  --border: rgba(255, 255, 255, 0.12);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-dark: rgba(255, 255, 255, 0.2);
+}
+
+html.custom body {
+  background: transparent;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  
+  /* Dark theme: Food background with vignette */
+  html.dark body {
+    background-color: #0f0f0f;
+    background-image: 
+      radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.9) 100%),
+      linear-gradient(135deg, #1a1510 0%, #2d1810 25%, #1f1410 50%, #181210 75%, #0f0c0a 100%);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  /* Light theme: clean background */
+  html.light body {
+    background-color: var(--background-primary);
+    background-image: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+
+  a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--gold-light);
+  }
+
+  ::selection {
+    background-color: var(--gold);
+    color: var(--background);
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+@layer components {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-luxury {
+    background: var(--surface-secondary);
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+  }
+
+  /* Input fields - soft dark styling */
+  .input-luxury {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--surface-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+
+  .input-luxury::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-luxury:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold-muted);
+  }
+
+  .input-luxury:hover {
+    border-color: var(--border-light);
+  }
+}
+
+/* ============================================
+   UTILITY STYLES
+   ============================================ */
+@layer utilities {
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

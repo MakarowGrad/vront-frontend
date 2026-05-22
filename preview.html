@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Food Delivery - Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury': {
+                            bg: '#0a0a0a',
+                            surface: '#111111',
+                            'surface-elevated': '#1a1a1a',
+                            gold: '#c9a962',
+                            'gold-light': '#d4b978',
+                            'gold-dark': '#a88b4a',
+                            neutral: '#8b7355',
+                            cream: '#f5f0e6',
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f5f0e6; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .gold-gradient { background: linear-gradient(135deg, #c9a962 0%, #d4b978 50%, #a88b4a 100%); }
+        .gold-text { background: linear-gradient(135deg, #c9a962 0%, #d4b978 50%, #a88b4a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(201, 169, 98, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-luxury-bg/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-serif gold-text font-bold">Gourmet Express</span>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#" class="text-sm text-gray-300 hover:text-luxury-gold transition-colors">Каталог</a>
+                    <a href="#" class="text-sm text-gray-300 hover:text-luxury-gold transition-colors">Избранное</a>
+                    <a href="#" class="text-sm text-gray-300 hover:text-luxury-gold transition-colors">Заказы</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button class="p-2 text-gray-300 hover:text-luxury-gold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                    <button class="p-2 text-gray-300 hover:text-luxury-gold relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-luxury-gold text-xs text-black rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-300 hover:text-luxury-gold relative">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-luxury-gold text-xs text-black rounded-full flex items-center justify-center">2</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center py-20">
+                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6">
+                    <span class="gold-text">Гастрономическое</span><br>
+                    <span class="text-white">совершенство</span>
+                </h1>
+                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Премиальная доставка изысканных блюд от лучших шеф-поваров города
+                </p>
+                <div class="flex gap-4 justify-center">
+                    <button class="gold-gradient text-black px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity">
+                        Перейти в каталог
+                    </button>
+                    <button class="border border-luxury-gold text-luxury-gold px-8 py-3 rounded-full font-medium hover:bg-luxury-gold/10 transition-colors">
+                        Подробнее
+                    </button>
+                </div>
+                <div class="flex justify-center gap-12 mt-12 text-center">
+                    <div>
+                        <div class="text-3xl font-serif gold-text">500+</div>
+                        <div class="text-sm text-gray-500">блюд</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-serif gold-text">50+</div>
+                        <div class="text-sm text-gray-500">шеф-поваров</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-serif gold-text">4.9</div>
+                        <div class="text-sm text-gray-500">рейтинг</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-luxury-surface">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-serif font-bold text-center mb-12">Категории</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🥗</span>
+                    </div>
+                    <div class="text-sm font-medium">Закуски</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🍤</span>
+                    </div>
+                    <div class="text-sm font-medium">Канапе</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🥬</span>
+                    </div>
+                    <div class="text-sm font-medium">Салаты</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🍖</span>
+                    </div>
+                    <div class="text-sm font-medium">Горячее</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🍰</span>
+                    </div>
+                    <div class="text-sm font-medium">Десерты</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🎁</span>
+                    </div>
+                    <div class="text-sm font-medium">Наборы</div>
+                </div>
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl p-4 text-center cursor-pointer border border-white/5">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-luxury-gold/10 flex items-center justify-center">
+                        <span class="text-2xl">🍹</span>
+                    </div>
+                    <div class="text-sm font-medium">Напитки</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes (Hits) -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-serif font-bold">Хиты</h2>
+                <a href="#" class="text-luxury-gold hover:underline text-sm">Смотреть все →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Dish Card 1 -->
+                <div class="card-hover bg-luxury-surface rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1546241072-48010ad2862c?w=600" alt="Тартар" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">Хит</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Тартар из говядины с трюфелем</h3>
+                        <p class="text-sm text-gray-500 mb-3">Классический тартар с трюфельным маслом</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">1 850 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">180 г</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish Card 2 -->
+                <div class="card-hover bg-luxury-surface rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600" alt="Филе миньон" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">Хит</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Филе миньон с трюфелем</h3>
+                        <p class="text-sm text-gray-500 mb-3">Нежное филе с трюфельным соусом</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">3 200 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">280 г</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dish Card 3 -->
+                <div class="card-hover bg-luxury-surface rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=600" alt="Канапе с икрой" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">Хит</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Канапе с красной икрой</h3>
+                        <p class="text-sm text-gray-500 mb-3">Изысканные канапе с икрой</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">3 500 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">8 шт</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                        <div class="mt-2 text-xs text-luxury-gold">Кратно 8 шт</div>
+                    </div>
+                </div>
+
+                <!-- Dish Card 4 -->
+                <div class="card-hover bg-luxury-surface rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600" alt="Тирамису" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">Хит</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Тирамису классическое</h3>
+                        <p class="text-sm text-gray-500 mb-3">Аутентичное итальянское тирамису</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">650 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">150 г</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Dishes -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-luxury-surface">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-serif font-bold">Новинки</h2>
+                <a href="#" class="text-luxury-gold hover:underline text-sm">Смотреть все →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- New Dish Card 1 -->
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1553163147-621957516919?w=600" alt="Омар" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-green-500 text-white text-xs rounded-full">Новое</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Хвост омара в сливочном соусе</h3>
+                        <p class="text-sm text-gray-500 mb-3">Нежнейший хвост омара с шампанским</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">4 500 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">320 г</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Dish Card 2 -->
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600" alt="Канапе с лососем" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-green-500 text-white text-xs rounded-full">Новое</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Канапе с лососем</h3>
+                        <p class="text-sm text-gray-500 mb-3">Свежие канапе с слабосоленым лососем</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">1 800 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">8 шт</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                        <div class="mt-2 text-xs text-luxury-gold">Кратно 8 шт</div>
+                    </div>
+                </div>
+
+                <!-- New Dish Card 3 -->
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1470324161839-ce2bb6fa6bc3?w=600" alt="Крем-брюле" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-green-500 text-white text-xs rounded-full">Новое</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Крем-брюле ванильное</h3>
+                        <p class="text-sm text-gray-500 mb-3">Нежное крем-брюле с карамельной корочкой</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">550 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">120 г</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Dish Card 4 -->
+                <div class="card-hover bg-luxury-surface-elevated rounded-xl overflow-hidden border border-white/5">
+                    <div class="relative aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=600" alt="Коктейль" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 px-2 py-1 bg-green-500 text-white text-xs rounded-full">Новое</span>
+                        <button class="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:text-red-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium mb-1">Коктейль Манго-Маракуйя</h3>
+                        <p class="text-sm text-gray-500 mb-3">Тропический безалкогольный коктейль</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold gold-text">550 ₽</span>
+                                <span class="text-xs text-gray-500 ml-2">400 мл</span>
+                            </div>
+                            <button class="w-8 h-8 gold-gradient rounded-full flex items-center justify-center text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                        <div class="mt-2 text-xs text-luxury-gold">Кратно 8 шт</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-luxury-surface border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-serif gold-text font-bold mb-4">Gourmet Express</div>
+                    <p class="text-gray-500 text-sm">Премиальная доставка изысканных блюд от лучших шеф-поваров города.</p>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">Меню</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-luxury-gold">Каталог</a></li>
+                        <li><a href="#" class="hover:text-luxury-gold">Избранное</a></li>
+                        <li><a href="#" class="hover:text-luxury-gold">Заказы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">Информация</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-luxury-gold">О нас</a></li>
+                        <li><a href="#" class="hover:text-luxury-gold">Доставка</a></li>
+                        <li><a href="#" class="hover:text-luxury-gold">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="gold-text text-lg">+7 (999) 123-45-67</li>
+                        <li>info@gourmetexpress.ru</li>
+                        <li>Москва, ул. Гурме, 1</li>
+                        <li>Ежедневно 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 mt-8 pt-8 text-center text-sm text-gray-500">
+                © 2024 Gourmet Express. Все права защищены.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
