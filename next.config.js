@@ -13,6 +13,7 @@ const nextConfig = {
   },
 
   // SECURITY-FIX-CSP-001: Add CSP and security headers [2026-05-18]
+  // FORCE-REBUILD-2026-05-15: Rebuild with updated NEXT_PUBLIC_API_URL for Timeweb backend
   async headers() {
     const isDev = process.env.NODE_ENV !== 'production';
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
