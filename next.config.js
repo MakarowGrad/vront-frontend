@@ -18,10 +18,18 @@ const nextConfig = {
     const isDev = process.env.NODE_ENV !== 'production';
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     // Extract origin from API URL for CSP directives
-    const apiOrigin = apiUrl ? apiUrl.replace('/api', '').replace(/\/$/, '') : '';
+    let apiOrigin = '';
+    try {
+      apiOrigin = apiUrl ? new URL(apiUrl).origin : '';
+    } catch {
+      apiOrigin = '';
+    }
     // Fallback for Timeweb backend when env var is stale in build cache
     const prodApiOrigin = 'https://makarowgrad-vront-backend-53ee.twc1.net';
-    const cspApiOrigin = isDev ? '' : (apiOrigin || prodApiOrigin);
+    const cspApiOrigins = isDev
+      ? ['http://localhost:3001', 'http://192.168.1.37:3001']
+      : [prodApiOrigin, apiOrigin].filter(Boolean);
+    const cspApiOriginStr = cspApiOrigins.join(' ');
     return [
       {
         source: '/:path*',
@@ -34,13 +42,13 @@ const nextConfig = {
               // DEV: images served from backend on different port
               isDev
                 ? "img-src 'self' blob: data: http://localhost:3001 http://192.168.1.37:3001"
-                : `img-src 'self' blob: data: ${cspApiOrigin}`,
+                : `img-src 'self' blob: data: ${cspApiOriginStr}`,
               "font-src 'self'",
               // DEV: allow API calls to backend on different port
               isDev
                 ? "connect-src 'self' http://localhost:3001 http://192.168.1.37:3001"
-                : `connect-src 'self' ${cspApiOrigin}`,
-              // DEV: Next.js HMR requires unsafe-eval [2026-05-19]
+                : `connect-src 'self' ${cspApiOriginStr}`,
+              // Always allow Max WebApp script source
               isDev
                 ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://st.max.ru"
                 : "script-src 'self' 'unsafe-inline' https://st.max.ru",

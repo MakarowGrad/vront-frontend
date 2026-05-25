@@ -19,7 +19,7 @@ export function getImageUrl(url: string | undefined): string {
   if (!url) return '';
   if (url.startsWith('blob:')) return '/icons/icon-192x192.png';
   if (url.startsWith('http')) return url;
-  const apiBase = API_BASE.replace('/api', '');
+  const apiBase = API_BASE.endsWith('/api') ? API_BASE.slice(0, -4) : API_BASE;
   return `${apiBase}${url.startsWith('/') ? url : '/' + url}`;
 }
 
