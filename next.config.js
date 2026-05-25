@@ -43,7 +43,7 @@ const nextConfig = {
               // DEV: Next.js HMR requires unsafe-eval [2026-05-19]
               isDev
                 ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://st.max.ru"
-                : "script-src 'self' 'unsafe-inline'",
+                : "script-src 'self' 'unsafe-inline' https://st.max.ru",
               "worker-src 'self'",
               "manifest-src 'self'",
               "frame-ancestors 'none'",
