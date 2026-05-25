@@ -5,9 +5,13 @@
  * [2026-05-18]
  */
 
+// Fallback for production domain when NEXT_PUBLIC_API_URL is stale in build cache
+const PROD_API_URL = 'https://makarowgrad-vront-backend-53ee.twc1.net/api';
 const API_BASE = process.env.NEXT_PUBLIC_API_URL
   || (typeof window !== 'undefined'
-    ? `${window.location.protocol}//${window.location.hostname}:3001/api`
+    ? (window.location.hostname === 'vsvoeytarelke.ru'
+        ? PROD_API_URL
+        : `${window.location.protocol}//${window.location.hostname}:3001/api`)
     : 'http://localhost:3001/api');
 
 export { API_BASE };

@@ -10,8 +10,7 @@ import { useRouter } from "next/navigation";
 import { Phone, ArrowRight, AlertCircle, LogIn, Loader2, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { encryptData } from "@/app/lib/crypto";
-
-const API_URL = typeof window !== "undefined" ? `${window.location.protocol}//${window.location.hostname}:3001/api` : "http://localhost:3001/api";
+import { API_BASE } from "@/lib/api";
 
 export default function CustomerLoginPage() {
   const router = useRouter();
@@ -93,7 +92,7 @@ export default function CustomerLoginPage() {
 
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_URL}/customers/send-otp`, {
+      const res = await fetch(`${API_BASE}/customers/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: plainPhone }),
@@ -131,7 +130,7 @@ export default function CustomerLoginPage() {
 
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_URL}/customers/verify-otp`, {
+      const res = await fetch(`${API_BASE}/customers/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: plainPhone, code }),

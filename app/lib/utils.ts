@@ -6,6 +6,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Dish, Order, OrderStatus, PaymentMethod, FulfillmentType } from '@/app/types';
+import { API_BASE } from '@/app/lib/api';
 
 // ============================================================================
 // Image URL Helper
@@ -16,10 +17,10 @@ import { Dish, Order, OrderStatus, PaymentMethod, FulfillmentType } from '@/app/
  */
 export function getImageUrl(url: string | undefined): string {
   if (!url) return '';
-  if (url.startsWith('blob:')) return '/images/placeholder-dish.jpg';
+  if (url.startsWith('blob:')) return '/icons/icon-192x192.png';
   if (url.startsWith('http')) return url;
-  const host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-  return `http://${host}:3001${url.startsWith('/') ? url : '/' + url}`;
+  const apiBase = API_BASE.replace('/api', '');
+  return `${apiBase}${url.startsWith('/') ? url : '/' + url}`;
 }
 
 // ============================================================================

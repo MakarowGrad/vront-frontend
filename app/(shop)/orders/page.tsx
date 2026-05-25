@@ -22,10 +22,9 @@ import { Order, OrderStatus } from '@/app/types';
 import { decryptData } from '@/app/lib/crypto';
 import { OrderCard } from '@/app/components/orders/OrderCard';
 import { ReorderModal } from '@/app/components/orders/ReorderModal';
+import { API_BASE } from '@/lib/api';
 
 const mockOrders: any[] = [];
-
-const API_URL = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}:3001/api` : 'http://localhost:3001/api';
 
 const STATUS_FILTERS: { value: OrderStatus | 'all'; label: string }[] = [
   { value: 'all', label: 'Все заказы' },
@@ -100,7 +99,7 @@ export default function OrdersPage() {
       setCustomerName(name);
       
       // Load orders from API
-      fetch(`${API_URL}/orders/customer/${encodeURIComponent(phone)}`)
+      fetch(`${API_BASE}/orders/customer/${encodeURIComponent(phone)}`)
       .then(res => {
         if (!res.ok) throw new Error('Ошибка загрузки заказов');
         return res.json();

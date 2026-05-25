@@ -19,6 +19,9 @@ const nextConfig = {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
     // Extract origin from API URL for CSP directives
     const apiOrigin = apiUrl ? apiUrl.replace('/api', '').replace(/\/$/, '') : '';
+    // Fallback for Timeweb backend when env var is stale in build cache
+    const prodApiOrigin = 'https://makarowgrad-vront-backend-53ee.twc1.net';
+    const cspApiOrigin = isDev ? '' : (apiOrigin || prodApiOrigin);
     return [
       {
         source: '/:path*',
@@ -31,12 +34,12 @@ const nextConfig = {
               // DEV: images served from backend on different port
               isDev
                 ? "img-src 'self' blob: data: http://localhost:3001 http://192.168.1.37:3001"
-                : `img-src 'self' blob: data: ${apiOrigin}`,
+                : `img-src 'self' blob: data: ${cspApiOrigin}`,
               "font-src 'self'",
               // DEV: allow API calls to backend on different port
               isDev
                 ? "connect-src 'self' http://localhost:3001 http://192.168.1.37:3001"
-                : `connect-src 'self' ${apiOrigin}`,
+                : `connect-src 'self' ${cspApiOrigin}`,
               // DEV: Next.js HMR requires unsafe-eval [2026-05-19]
               isDev
                 ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://st.max.ru"

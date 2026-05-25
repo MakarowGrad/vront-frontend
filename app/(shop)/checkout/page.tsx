@@ -17,7 +17,7 @@ import { saveOrderOffline } from '@/app/lib/offlineOrder';
 import { encryptData } from '@/app/lib/crypto';
 import { useMaxBackButton } from '@/app/hooks/useMaxBackButton';
 import { getMaxUser } from '@/app/lib/max-bridge';
-const API_BASE = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}:3001/api` : 'http://localhost:3001/api';
+import { API_BASE } from '@/lib/api';
 
 export default function CheckoutPage() {
   useMaxBackButton();

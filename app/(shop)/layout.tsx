@@ -20,6 +20,7 @@ import { useCartStore } from "@/app/store/cartStore";
 import { useFavoritesStore } from "@/app/store/favoritesStore";
 import { CartItem as CartItemType } from "@/app/types";
 import { CartRefContext } from "@/app/context/CartRefContext";
+import { API_BASE } from "@/lib/api";
 
 // ============================================
 // Types
@@ -164,8 +165,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
 // Client Theme Shell (isolates hydration-sensitive render)
 // ============================================
 
-const getApiBase = () =>
-  process.env.NEXT_PUBLIC_API_URL || `${window.location.protocol}//${window.location.hostname}:3001/api`;
+const getApiBase = () => API_BASE;
 
 function ClientThemeShell({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);

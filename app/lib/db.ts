@@ -1,6 +1,7 @@
 import Dexie, { Table } from 'dexie';
 import type { Dish, Category, CartItem } from '@/app/types';
 import { decryptData } from './crypto';
+import { API_BASE } from '@/lib/api';
 
 export interface CachedImage {
   url: string;
@@ -74,9 +75,7 @@ export async function getCachedImageUrl(url: string): Promise<string | null> {
 
 // Preload all dish images
 export async function preloadAllImages(dishes: Dish[]): Promise<void> {
-  const base = typeof window !== 'undefined'
-    ? `${window.location.protocol}//${window.location.hostname}:3001`
-    : 'http://localhost:3001';
+  const base = API_BASE.replace('/api', '');
 
   const urls = new Set<string>();
   for (const dish of dishes) {

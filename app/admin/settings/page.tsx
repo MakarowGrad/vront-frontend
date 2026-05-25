@@ -20,11 +20,7 @@ import {
   X
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { getAccessToken } from '@/lib/api';
-
-const API_BASE = typeof window !== 'undefined'
-  ? `${window.location.protocol}//${window.location.hostname}:3001/api`
-  : 'http://localhost:3001/api';
+import { getAccessToken, API_BASE } from '@/lib/api';
 
 const THEME_OPTIONS = [
   { value: 'dark', label: 'Тёмная' },

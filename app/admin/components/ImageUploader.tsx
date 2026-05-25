@@ -7,11 +7,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { Upload, X, Camera, Loader2 } from 'lucide-react';
-import { apiFetch } from '@/lib/api';
-
-const API_BASE = typeof window !== 'undefined'
-  ? `${window.location.protocol}//${window.location.hostname}:3001/api`
-  : 'http://localhost:3001/api';
+import { apiFetch, API_BASE } from '@/lib/api';
 
 interface ImageUploaderProps {
   images: string[];
@@ -103,7 +99,7 @@ export function ImageUploader({
 
   const fullUrl = (url: string) => {
     if (url.startsWith('http')) return url;
-    if (url.startsWith('/')) return `${window.location.protocol}//${window.location.hostname}:3001${url}`;
+    if (url.startsWith('/')) return `${API_BASE.replace('/api', '')}${url}`;
     return url;
   };
 
