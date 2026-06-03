@@ -7,12 +7,23 @@
 
 // Fallback for production domain when NEXT_PUBLIC_API_URL is stale in build cache
 const PROD_API_URL = 'https://makarowgrad-vront-backend-53ee.twc1.net/api';
-const API_BASE = process.env.NEXT_PUBLIC_API_URL
-  || (typeof window !== 'undefined'
-    ? (window.location.hostname === 'vsvoeytarelke.ru'
-        ? PROD_API_URL
-        : `${window.location.protocol}//${window.location.hostname}:3001/api`)
-    : 'http://localhost:3001/api');
+
+function resolveApiBase(): string {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  // Ignore stale/invalid env URLs (amvera is deprecated, api subdomain may not resolve)
+  if (envUrl && !envUrl.includes('amvera.io') && !envUrl.includes('api.vsvoeytarelke.ru')) {
+    return envUrl;
+  }
+  if (typeof window !== 'undefined') {
+    if (window.location.hostname === 'vsvoeytarelke.ru' || window.location.hostname === 'www.vsvoeytarelke.ru') {
+      return PROD_API_URL;
+    }
+    return `${window.location.protocol}//${window.location.hostname}:3001/api`;
+  }
+  return 'http://localhost:3001/api';
+}
+
+const API_BASE = resolveApiBase();
 
 export { API_BASE };
 
