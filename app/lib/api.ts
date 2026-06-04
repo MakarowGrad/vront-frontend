@@ -15,10 +15,15 @@ function resolveApiBase(): string {
     return envUrl;
   }
   if (typeof window !== 'undefined') {
-    if (window.location.hostname === 'vsvoeytarelke.ru' || window.location.hostname === 'www.vsvoeytarelke.ru') {
+    const host = window.location.hostname;
+    if (
+      host === 'vsvoeytarelke.ru' ||
+      host === 'www.vsvoeytarelke.ru' ||
+      host.endsWith('.s3.twcstorage.ru')
+    ) {
       return PROD_API_URL;
     }
-    return `${window.location.protocol}//${window.location.hostname}:3001/api`;
+    return `${window.location.protocol}//${host}:3001/api`;
   }
   return 'http://localhost:3001/api';
 }

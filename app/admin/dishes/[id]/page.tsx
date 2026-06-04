@@ -1,9 +1,7 @@
-import OrderPage from './OrderPage';
-
 export async function generateStaticParams() {
   return [{ id: 'placeholder' }];
 }
 
 export default function Page() {
-  return <OrderPage />;
+  return <div>Dish</div>;
 }
