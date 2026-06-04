@@ -33,11 +33,8 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Helper: get API base from request origin
-function getApiBase(url) {
-  const u = new URL(url);
-  return `${u.protocol}//${u.host}/api`;
-}
+// API base for backend (Timeweb)
+const API_BASE = 'https://makarowgrad-vront-backend-53ee.twc1.net/api';
 
 // SECURITY-FIX-SW-003: Validate response before caching [2026-05-18]
 function isCacheableResponse(res) {
@@ -279,7 +276,7 @@ async function processPendingOrders(pendingOrders) {
   const results = [];
   for (const order of pendingOrders) {
     try {
-      const base = self.location.origin + '/api';
+      const base = API_BASE;
       const headers = { 'Content-Type': 'application/json' };
       if (order.accessToken) {
         headers['Authorization'] = `Bearer ${order.accessToken}`;
