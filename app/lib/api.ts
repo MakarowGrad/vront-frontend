@@ -19,7 +19,8 @@ function resolveApiBase(): string {
     if (
       host === 'vsvoeytarelke.ru' ||
       host === 'www.vsvoeytarelke.ru' ||
-      host.endsWith('.s3.twcstorage.ru')
+      host.endsWith('.s3.twcstorage.ru') ||
+      host.endsWith('.github.io')
     ) {
       return PROD_API_URL;
     }
