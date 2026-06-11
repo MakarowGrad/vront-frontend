@@ -26,6 +26,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { formatPrice, getPaymentMethodLabel, getFulfillmentTypeLabel } from '@/app/lib/utils';
+import { decryptData } from '@/app/lib/crypto';
 import { Dish, FulfillmentType, PaymentMethod } from '@/app/types';
 
 interface OrderItem {
@@ -63,13 +64,23 @@ function CheckoutSuccessInner() {
   const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
-    const orderData = sessionStorage.getItem('lastOrder');
-    if (orderData) {
-      setOrder(JSON.parse(orderData));
-    } else if (!isOffline) {
-      // Redirect if no order data (only for online orders)
-      router.push('/');
-    }
+    (async () => {
+      const raw = sessionStorage.getItem('lastOrder');
+      if (raw) {
+        const decrypted = await decryptData(raw);
+        if (decrypted) {
+          try {
+            setOrder(JSON.parse(decrypted));
+          } catch {
+            // legacy plaintext fallback
+            setOrder(JSON.parse(raw));
+          }
+        }
+      } else if (!isOffline) {
+        // Redirect if no order data (only for online orders)
+        router.push('/');
+      }
+    })();
 
     const timer = setTimeout(() => {
       setShowAnimation(false);

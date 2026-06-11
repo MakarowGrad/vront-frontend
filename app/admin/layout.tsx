@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Sidebar } from './components/Sidebar';
-import { Menu, X, Crown, Loader2 } from 'lucide-react';
-import { getAccessToken, refreshToken } from '@/lib/api';
+import { Menu, Crown, Loader2 } from 'lucide-react';
+import { getAccessToken, refreshToken, clearAccessToken, apiFetch } from '@/lib/api';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function AdminLayout({
   children,
@@ -12,38 +13,37 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoginPage, setIsLoginPage] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    setIsLoginPage(window.location.pathname === '/admin/login');
-  }, []);
+  const isLoginPage = pathname?.startsWith('/admin/login') ?? false;
 
-  useEffect(() => {
-    // Skip auth check on login page
-    if (isLoginPage) {
-      setIsAuthenticated(true);
-      setIsLoading(false);
-      return;
+  const handleLogout = async () => {
+    try {
+      await apiFetch('/admin/logout', { method: 'POST' });
+    } catch {
+      // ignore
     }
+    clearAccessToken();
+    queryClient.clear();
+    router.push('/admin/login');
+  };
 
-    // Check authentication
+  useEffect(() => {
+    if (isLoginPage) return;
+
     const checkAuth = async () => {
       const token = getAccessToken();
       if (!token) {
-        // Try to refresh token silently
         try {
           await refreshToken();
-          setIsAuthenticated(true);
         } catch {
           router.push('/admin/login');
         }
-      } else {
-        setIsAuthenticated(true);
       }
-      setIsLoading(false);
+      setIsAuthLoading(false);
     };
 
     const adminTheme = localStorage.getItem('adminTheme') || 'dark';
@@ -53,34 +53,27 @@ export default function AdminLayout({
 
     checkAuth();
 
-    // Periodic silent refresh every 10 minutes to prevent token expiry
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') checkAuth();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      clearInterval(refreshInterval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+
     const refreshInterval = setInterval(async () => {
       try {
         await refreshToken();
       } catch {
-        // Silent fail — next API call will handle 401
+        // Silent fail
       }
     }, 10 * 60 * 1000);
 
     return () => clearInterval(refreshInterval);
   }, [router, isLoginPage]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background-primary flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 text-gold animate-spin" />
-          <span className="text-body text-text-secondary">Проверка авторизации...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return null; // Will redirect via useEffect
-  }
-
-  // Login page renders without sidebar/header
   if (isLoginPage) {
     return (
       <div className="min-h-screen bg-background-primary">
@@ -89,9 +82,19 @@ export default function AdminLayout({
     );
   }
 
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen bg-background-primary flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 text-gold animate-spin" />
+          <p className="text-sm text-text-secondary">Проверка доступа...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background-primary flex">
-      {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
@@ -99,7 +102,6 @@ export default function AdminLayout({
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`
           fixed lg:static inset-y-0 left-0 z-50
@@ -111,10 +113,8 @@ export default function AdminLayout({
         <Sidebar onClose={() => setSidebarOpen(false)} />
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Header */}
-        <header className="h-16 bg-surface-primary border-b border-border flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+        <header className="h-16 bg-surface-primary border-b border-border flex items-center justify-between px-4 lg:px-6 relative">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -139,14 +139,12 @@ export default function AdminLayout({
           </div>
         </header>
 
-        {/* Page Content */}
         <main className="flex-1 p-4 lg:p-6 overflow-auto">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
         </main>
 
-        {/* Footer */}
         <footer className="bg-surface-primary border-t border-border py-3 px-4 lg:px-6">
           <div className="flex items-center justify-between">
             <span className="text-caption text-text-muted">

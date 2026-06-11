@@ -14,7 +14,7 @@ import { PaymentMethod } from '@/app/types';
 import { CheckoutForm, CheckoutFormData } from '@/app/components/checkout/CheckoutForm';
 import { OrderSummary } from '@/app/components/checkout/OrderSummary';
 import { saveOrderOffline } from '@/app/lib/offlineOrder';
-import { encryptData } from '@/app/lib/crypto';
+import { encryptData, decryptData } from '@/app/lib/crypto';
 import { useMaxBackButton } from '@/app/hooks/useMaxBackButton';
 import { getMaxUser } from '@/app/lib/max-bridge';
 import { API_BASE } from '@/lib/api';
@@ -28,22 +28,29 @@ export default function CheckoutPage() {
   const [formData, setFormData] = useState<CheckoutFormData | null>(null);
   const [isOffline, setIsOffline] = useState(false);
 
-  // Load preferences from cart page
+  // Load customer data + saved preferences
   useEffect(() => {
-    const prefs = sessionStorage.getItem('checkoutPrefs');
-    if (prefs) {
-      const parsed = JSON.parse(prefs);
+    (async () => {
+      const prefsRaw = sessionStorage.getItem('checkoutPrefs');
+      const prefs = prefsRaw ? JSON.parse(prefsRaw) : {};
+
+      const savedPhone = await decryptData(localStorage.getItem('customer_phone') || '');
+      const savedName = await decryptData(localStorage.getItem('customer_name') || '');
+      const savedAddress = await decryptData(localStorage.getItem('checkout_address') || '');
+      const savedPayment = await decryptData(localStorage.getItem('checkout_payment_method') || '');
+      const savedFulfillment = await decryptData(localStorage.getItem('checkout_fulfillment_type') || '');
+
       setFormData({
-        name: '',
-        phone: '',
-        fulfillmentType: parsed.fulfillmentType || 'delivery',
-        address: parsed.address || '',
+        name: savedName || '',
+        phone: savedPhone || '+7',
+        fulfillmentType: prefs.fulfillmentType || savedFulfillment || 'delivery',
+        address: prefs.address || savedAddress || '',
         date: '',
         time: '',
-        comment: parsed.comment || '',
-        paymentMethod: PaymentMethod.CASH,
+        comment: prefs.comment || '',
+        paymentMethod: (savedPayment as PaymentMethod) || PaymentMethod.CASH,
       });
-    }
+    })();
   }, []);
 
   // Redirect if cart is empty (but not after successful submission)
@@ -93,6 +100,9 @@ export default function CheckoutPage() {
         // SECURITY-FIX-LS-002: Encrypt PII before storing in localStorage [2026-05-18]
         localStorage.setItem('customer_phone', await encryptData(data.phone));
         if (data.name) localStorage.setItem('customer_name', await encryptData(data.name));
+        if (data.address) localStorage.setItem('checkout_address', await encryptData(data.address));
+        localStorage.setItem('checkout_payment_method', await encryptData(data.paymentMethod));
+        localStorage.setItem('checkout_fulfillment_type', await encryptData(data.fulfillmentType));
 
         setIsOffline(true);
         setOrderSubmitted(true);
@@ -147,8 +157,12 @@ export default function CheckoutPage() {
       // SECURITY-FIX-LS-002: Encrypt PII before storing in localStorage [2026-05-18]
       localStorage.setItem('customer_phone', await encryptData(data.phone));
       if (data.name) localStorage.setItem('customer_name', await encryptData(data.name));
+      if (data.address) localStorage.setItem('checkout_address', await encryptData(data.address));
+      localStorage.setItem('checkout_payment_method', await encryptData(data.paymentMethod));
+      localStorage.setItem('checkout_fulfillment_type', await encryptData(data.fulfillmentType));
 
-      sessionStorage.setItem('lastOrder', JSON.stringify(orderData));
+      // SECURITY-FIX-LS-003: Encrypt order summary before sessionStorage [2026-06-11]
+      sessionStorage.setItem('lastOrder', await encryptData(JSON.stringify(orderData)));
       setOrderSubmitted(true);
       clearCart();
       router.push('/checkout/success');
@@ -197,7 +211,7 @@ export default function CheckoutPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Form */}
           <div className="lg:col-span-2">
-            <div className="bg-surface-secondary rounded-xl border border-border/50 p-6">
+            <div className="bg-surface-secondary rounded-xl border border-border/50 p-4 sm:p-6">
               <CheckoutForm
                 onSubmit={handleSubmit}
                 isLoading={isLoading}

@@ -8,7 +8,11 @@
  */
 
 const STORAGE_KEY = (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_STORAGE_KEY)
-  || 'vtar-default-key-change-me-in-prod';
+  || '';
+
+if (!STORAGE_KEY) {
+  throw new Error('NEXT_PUBLIC_STORAGE_KEY is required for client-side encryption');
+}
 
 const FALLBACK_PREFIX = 'fb64:';
 
