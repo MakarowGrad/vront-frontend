@@ -1,7 +1,7 @@
-const STATIC_CACHE = 'vtar-static-v2';
-const API_CACHE = 'vtar-api-v2';
-const IMAGE_CACHE = 'vtar-images-v2';
-const NEXT_CACHE = 'vtar-next-v2';
+const STATIC_CACHE = 'vtar-static-v3';
+const API_CACHE = 'vtar-api-v3';
+const IMAGE_CACHE = 'vtar-images-v3';
+const NEXT_CACHE = 'vtar-next-v3';
 
 const STATIC_ASSETS = [
   '/',

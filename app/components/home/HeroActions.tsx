@@ -18,7 +18,7 @@ export const HeroActions: React.FC = () => {
           <Link href="/catalog" className="w-full">
             <button className="w-full py-4 px-4 rounded-xl text-base font-semibold bg-transparent text-text-primary border-2 border-border hover:border-gold hover:text-gold transition-all active:scale-[0.98] flex items-center justify-center gap-2">
               <UtensilsCrossed className="w-5 h-5" />
-              Меню
+              Нажмите Меню
             </button>
           </Link>
         </div>

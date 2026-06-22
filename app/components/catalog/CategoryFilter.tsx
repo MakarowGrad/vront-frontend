@@ -126,6 +126,16 @@ export function CategoryFilter({
           <ChevronRight className="w-4 h-4" />
         </button>
       )}
+
+      {/* Mobile scroll hint */}
+      {canScrollRight && (
+        <div className="lg:hidden absolute -bottom-5 left-0 right-0 flex justify-center">
+          <div className="flex items-center gap-1 text-[10px] text-text-muted animate-pulse">
+            <span>Листайте вправо</span>
+            <ChevronRight className="w-3 h-3" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

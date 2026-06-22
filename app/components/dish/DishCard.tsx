@@ -88,9 +88,18 @@ export function DishCard({
     return new Intl.NumberFormat('ru-RU').format(price);
   };
 
+  const formatWeight = (weight?: number) => {
+    if (!weight) return null;
+    if (weight >= 1000) {
+      const kg = weight / 1000;
+      return `${kg.toLocaleString('ru-RU')} кг`;
+    }
+    return `${weight} г`;
+  };
+
   const unitLabel = (() => {
     if (dish.weightUnit && dish.weightUnit !== 'г') return dish.weightUnit;
-    if (dish.weight) return `${dish.weight}г`;
+    if (dish.weight) return null; // weight is already shown by formatWeight
     return 'шт';
   })();
 
@@ -166,14 +175,16 @@ export function DishCard({
           {/* Content */}
           <div className="p-3 flex-1 flex flex-col">
             <h3 className="font-serif text-sm text-text-primary line-clamp-1 mb-1">{dish.title}</h3>
-            {dish.weight && (
-              <p className="text-xs text-text-muted line-clamp-1 mb-2">{dish.weight} {dish.weightUnit || 'г'}</p>
-            )}
             
             <div className="flex items-center justify-between mt-auto">
-              <div className="flex items-baseline gap-1">
-                <span className="font-mono text-sm sm:text-base font-bold text-gold whitespace-nowrap">{formatPrice(dish.price)} ₽</span>
-                <span className="text-[10px] text-text-muted">/ {unitLabel}</span>
+              <div className="flex items-baseline gap-1.5 flex-wrap">
+                {dish.weight && (
+                  <span className="font-mono text-xs sm:text-sm font-medium text-text-muted whitespace-nowrap">
+                    {formatWeight(dish.weight)}
+                  </span>
+                )}
+                <span className="font-mono text-sm sm:text-base font-bold text-text-primary whitespace-nowrap">{formatPrice(dish.price)} ₽</span>
+                {unitLabel && <span className="text-[10px] text-text-muted">/ {unitLabel}</span>}
               </div>
               
               {mounted && quantity > 0 ? (
@@ -260,9 +271,14 @@ export function DishCard({
           <p className="text-sm text-text-muted line-clamp-2 mb-3">{dish.shortDescription}</p>
           
           <div className="flex items-center justify-between mt-auto">
-            <div className="flex items-baseline gap-1">
-              <span className="font-mono text-xl font-bold text-gold">{formatPrice(dish.price)} ₽</span>
-              <span className="text-xs text-text-muted">/ {unitLabel}</span>
+            <div className="flex items-baseline gap-2 flex-wrap">
+              {dish.weight && (
+                <span className="font-mono text-base font-medium text-text-muted">
+                  {formatWeight(dish.weight)}
+                </span>
+              )}
+              <span className="font-mono text-xl font-bold text-text-primary">{formatPrice(dish.price)} ₽</span>
+              {unitLabel && <span className="text-xs text-text-muted">/ {unitLabel}</span>}
             </div>
             
             {mounted && quantity > 0 ? (
