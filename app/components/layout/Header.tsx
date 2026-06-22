@@ -98,10 +98,6 @@ export const Header: React.FC<HeaderProps> = ({
             className="font-serif text-base text-text-primary flex items-center gap-1.5"
           >
             В СВОЕЙ ТАРЕЛКЕ
-            {/* SECURITY-FIX-PWA-001: HTTPS security indicator [2026-05-18] */}
-            {mounted && typeof window !== 'undefined' && window.location.protocol === 'https:' && (
-              <span title="Защищённое соединение" className="text-[10px] text-success">🔒</span>
-            )}
           </Link>
 
           {/* Icons */}
