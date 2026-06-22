@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { GripVertical, Eye, EyeOff, Pencil, Check, X, Plus, Trash2, ArrowUp, ArrowDown, Loader2 } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
-import { useAdminCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from '@/app/hooks/useCategories';
+import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from '@/app/hooks/useCategories';
 import { Category } from '@/app/types';
 
 export default function CategoriesPage() {
@@ -15,7 +15,7 @@ export default function CategoriesPage() {
   const [newCategoryName, setNewCategoryName] = useState('');
 
   const queryClient = useQueryClient();
-  const { data: categories = [], isLoading } = useAdminCategories();
+  const { data: categories = [], isLoading } = useCategories();
   const createCategory = useCreateCategory();
   const updateCategory = useUpdateCategory();
   const deleteCategory = useDeleteCategory();

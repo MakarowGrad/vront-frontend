@@ -72,7 +72,7 @@ export function Sidebar({ onClose }: SidebarProps) {
     }
     clearAccessToken();
     queryClient.clear();
-    router.push('/admin/login');
+    window.location.href = '/admin/login';
   };
 
   return (

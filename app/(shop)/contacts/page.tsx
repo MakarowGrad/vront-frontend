@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Phone, Clock, Mail, User } from 'lucide-react';
+import { Phone, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Контакты',
@@ -16,22 +16,12 @@ export default function ContactsPage() {
             Контакты
           </h1>
           <p className="text-body text-text-secondary max-w-lg mx-auto">
-            Свяжитесь со мной удобным способом — всегда рада помочь с вашим мероприятием.
+            Свяжитесь с нами удобным способом.
           </p>
         </div>
 
         {/* Contact Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center">
-                <User className="w-5 h-5 text-gold" />
-              </div>
-              <h3 className="font-serif text-heading-sm text-text-primary">Фуршетный мастер Жанна</h3>
-            </div>
-            <p className="text-body text-text-secondary">Всегда рада помочь с вашим мероприятием</p>
-          </div>
-
           <div className="bg-surface-secondary border border-border rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center">
@@ -57,18 +47,6 @@ export default function ContactsPage() {
               <h3 className="font-serif text-heading-sm text-text-primary">Режим работы</h3>
             </div>
             <p className="text-body text-text-secondary">Ежедневно: 9:00 — 21:00</p>
-          </div>
-
-          <div className="bg-surface-secondary border border-border rounded-2xl p-6 sm:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center">
-                <Mail className="w-5 h-5 text-gold" />
-              </div>
-              <h3 className="font-serif text-heading-sm text-text-primary">Email</h3>
-            </div>
-            <a href="mailto:info@vsvoitar.ru" className="text-body text-text-secondary hover:text-gold transition-colors">
-              info@vsvoitar.ru
-            </a>
           </div>
         </div>
       </div>
