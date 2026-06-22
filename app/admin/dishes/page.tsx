@@ -158,7 +158,7 @@ function DishesPageContent() {
       render: (dish) => (
         <div className="flex items-center gap-1">
           <Link
-            href={`/admin/dishes/${dish.id}/edit`}
+            href={`/admin/dishes/edit?id=${dish.id}`}
             className="p-2 rounded-lg hover:bg-surface-hover text-text-muted hover:text-gold transition-colors"
             title="Редактировать"
           >
