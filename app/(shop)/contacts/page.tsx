@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Phone, Clock, Mail, MapPin, User } from 'lucide-react';
+import { Phone, Clock, Mail, User } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Контакты',
@@ -29,7 +29,7 @@ export default function ContactsPage() {
               </div>
               <h3 className="font-serif text-heading-sm text-text-primary">Фуршетный мастер Жанна</h3>
             </div>
-            <p className="text-body text-text-secondary">Работаю в Жигалово и районе</p>
+            <p className="text-body text-text-secondary">Всегда рада помочь с вашим мероприятием</p>
           </div>
 
           <div className="bg-surface-secondary border border-border rounded-2xl p-6">
@@ -57,16 +57,6 @@ export default function ContactsPage() {
               <h3 className="font-serif text-heading-sm text-text-primary">Режим работы</h3>
             </div>
             <p className="text-body text-text-secondary">Ежедневно: 9:00 — 21:00</p>
-          </div>
-
-          <div className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-gold" />
-              </div>
-              <h3 className="font-serif text-heading-sm text-text-primary">Работаю в</h3>
-            </div>
-            <p className="text-body text-text-secondary">Жигалово</p>
           </div>
 
           <div className="bg-surface-secondary border border-border rounded-2xl p-6 sm:col-span-2">

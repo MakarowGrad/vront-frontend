@@ -12,6 +12,7 @@ import {
   ChevronRight,
   LogOut,
   CalendarDays,
+  BarChart3,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -42,6 +43,11 @@ const navigation = [
     name: 'Календарь',
     href: '/admin/calendar',
     icon: CalendarDays,
+  },
+  {
+    name: 'Статистика',
+    href: '/admin/analytics',
+    icon: BarChart3,
   },
   {
     name: 'Настройки',
