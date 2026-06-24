@@ -150,7 +150,9 @@ export default function AdminOrdersPage() {
                       </span>
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
-                        {new Date(order.createdAt).toLocaleString('ru-RU')}
+                        {order.pickupTime
+                          ? new Date(order.pickupTime).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+                          : new Date(order.createdAt).toLocaleString('ru-RU')}
                       </span>
                     </div>
 

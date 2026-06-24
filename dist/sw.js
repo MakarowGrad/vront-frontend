@@ -304,6 +304,7 @@ async function processPendingOrders(pendingOrders) {
           customerName: order.customerName,
           customerPhone: order.customerPhone,
           deliveryAddress: order.deliveryAddress,
+          pickupTime: order.pickupTime,
           comment: order.comment,
         }),
       });

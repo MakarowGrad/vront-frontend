@@ -94,6 +94,7 @@ export default function CheckoutPage() {
           customerName: data.name,
           customerPhone: data.phone,
           deliveryAddress: orderPayload.deliveryAddress || '',
+          pickupTime: orderPayload.pickupTime,
           comment: data.comment,
         });
 

@@ -7,6 +7,7 @@ export interface OfflineOrderPayload {
   customerName: string;
   customerPhone: string;
   deliveryAddress: string;
+  pickupTime?: string;
   comment?: string;
 }
 
@@ -20,6 +21,7 @@ export async function saveOrderOffline(payload: OfflineOrderPayload): Promise<st
     customerName: await encryptData(payload.customerName),
     customerPhone: await encryptData(payload.customerPhone),
     deliveryAddress: await encryptData(payload.deliveryAddress),
+    pickupTime: payload.pickupTime,
     comment: payload.comment,
     status: 'pending',
   };

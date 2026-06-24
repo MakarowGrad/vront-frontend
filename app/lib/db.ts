@@ -17,6 +17,7 @@ export interface PendingOrder {
   customerName: string;
   customerPhone: string;
   deliveryAddress: string;
+  pickupTime?: string;
   comment?: string;
   status: 'pending' | 'syncing' | 'synced' | 'error';
   errorMessage?: string;

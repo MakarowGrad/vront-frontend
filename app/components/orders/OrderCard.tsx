@@ -7,7 +7,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronDown, RotateCcw, Package, Calendar, Truck, Store } from 'lucide-react';
+import { ChevronDown, RotateCcw, Package, Calendar, Clock, Truck, Store } from 'lucide-react';
 import { Order, OrderStatus } from '@/app/types';
 import { getImageUrl } from '@/app/lib/utils';
 import { 
@@ -94,11 +94,19 @@ export function OrderCard({ order, onReorder }: OrderCardProps) {
                   {getOrderStatusLabel(order.status)}
                 </span>
               </div>
-              <div className="flex items-center gap-3 mt-1 text-caption text-text-muted">
+              <div className="flex items-center gap-3 mt-1 text-caption text-text-muted flex-wrap">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3" />
-                  {formatDate(order.createdAt, { format: 'short' })}
+                  {order.pickupTime
+                    ? formatDate(order.pickupTime, { format: 'short' })
+                    : formatDate(order.createdAt, { format: 'short' })}
                 </span>
+                {order.pickupTime && (
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {new Date(order.pickupTime).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                )}
                 <span>•</span>
                 <span className="flex items-center gap-1">
                   {order.fulfillmentType === 'delivery' ? (
