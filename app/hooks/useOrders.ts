@@ -69,8 +69,8 @@ async function fetchOrders(): Promise<Order[]> {
 }
 
 async function updateOrderStatus({ orderId, status }: { orderId: string; status: string }): Promise<Order> {
-  const response = await apiFetch(`/ordering/orders/${orderId}/status`, {
-    method: 'PUT',
+  const response = await apiFetch(`/admin/orders/${orderId}/status`, {
+    method: 'POST',
     body: JSON.stringify({ status }),
   });
   
