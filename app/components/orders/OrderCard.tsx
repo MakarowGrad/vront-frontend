@@ -98,13 +98,13 @@ export function OrderCard({ order, onReorder }: OrderCardProps) {
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3" />
                   {order.pickupTime
-                    ? formatDate(order.pickupTime, { format: 'short' })
+                    ? new Date(order.pickupTime).toLocaleDateString('ru-RU', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' })
                     : formatDate(order.createdAt, { format: 'short' })}
                 </span>
                 {order.pickupTime && (
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {new Date(order.pickupTime).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+                    {new Date(order.pickupTime).toLocaleTimeString('ru-RU', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })}
                   </span>
                 )}
                 <span>•</span>

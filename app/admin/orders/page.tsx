@@ -13,7 +13,9 @@ import {
   User,
   ChevronDown,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  Truck,
+  Store,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -151,8 +153,16 @@ export default function AdminOrdersPage() {
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
                         {order.pickupTime
-                          ? new Date(order.pickupTime).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+                          ? new Date(order.pickupTime).toLocaleString('ru-RU', { timeZone: 'UTC', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
                           : new Date(order.createdAt).toLocaleString('ru-RU')}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        {order.fulfillmentType === 'delivery' ? (
+                          <Truck className="w-3.5 h-3.5" />
+                        ) : (
+                          <Store className="w-3.5 h-3.5" />
+                        )}
+                        {order.fulfillmentType === 'delivery' ? 'Доставка' : 'Самовывоз'}
                       </span>
                     </div>
 
