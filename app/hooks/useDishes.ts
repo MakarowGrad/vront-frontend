@@ -30,7 +30,6 @@ async function fetchDishes(filters?: DishFilters): Promise<Dish[]> {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     const response = await fetch(`${API_BASE}/catalog/dishes?${params.toString()}`, {
-      credentials: 'include',
       mode: 'cors',
       signal: controller.signal,
     });
@@ -57,7 +56,6 @@ async function fetchDishes(filters?: DishFilters): Promise<Dish[]> {
 
 async function fetchDishById(id: string): Promise<Dish> {
   const response = await fetch(`${API_BASE}/catalog/dishes/id/${id}`, {
-    credentials: 'include',
     mode: 'cors',
   });
 
@@ -71,7 +69,6 @@ async function fetchDishById(id: string): Promise<Dish> {
 
 async function fetchDishBySlug(slug: string): Promise<Dish> {
   const response = await fetch(`${API_BASE}/catalog/dishes/slug/${slug}`, {
-    credentials: 'include',
     mode: 'cors',
   });
 

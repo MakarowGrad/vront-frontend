@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
 
       setAccessToken(data.token.accessToken);
       setIsLoading(false);
-      router.push("/admin/dashboard");
+      window.location.href = "/admin/dashboard";
     } catch (err) {
       setError("Ошибка соединения с сервером");
       setIsLoading(false);

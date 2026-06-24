@@ -14,7 +14,6 @@ const CATEGORIES_KEY = 'categories';
 async function fetchCategories(): Promise<Category[]> {
   try {
     const response = await fetch(`${API_BASE}/catalog/categories`, {
-      credentials: 'include',
       mode: 'cors',
     });
 
@@ -38,7 +37,6 @@ async function fetchCategories(): Promise<Category[]> {
 
 async function fetchCategoryById(id: string): Promise<Category> {
   const response = await fetch(`${API_BASE}/catalog/categories/${id}`, {
-    credentials: 'include',
     mode: 'cors',
   });
 
@@ -52,7 +50,6 @@ async function fetchCategoryById(id: string): Promise<Category> {
 
 async function fetchCategoryBySlug(slug: string): Promise<Category> {
   const response = await fetch(`${API_BASE}/catalog/categories/slug/${slug}`, {
-    credentials: 'include',
     mode: 'cors',
   });
 

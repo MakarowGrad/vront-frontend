@@ -28,7 +28,7 @@ export default function AdminLayout({
     }
     clearAccessToken();
     queryClient.clear();
-    router.push('/admin/login');
+    window.location.href = '/admin/login';
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function AdminLayout({
         try {
           await refreshToken();
         } catch {
-          router.push('/admin/login');
+          window.location.href = '/admin/login';
         }
       }
       setIsAuthLoading(false);
@@ -58,9 +58,19 @@ export default function AdminLayout({
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
+    // SECURITY: if the browser restored this admin page from bfcache after logout,
+    // force a reload so the auth check runs against current (empty) credentials.
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted && !getAccessToken()) {
+        window.location.reload();
+      }
+    };
+    window.addEventListener('pageshow', handlePageShow);
+
     return () => {
       clearInterval(refreshInterval);
       document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('pageshow', handlePageShow);
     };
 
     const refreshInterval = setInterval(async () => {

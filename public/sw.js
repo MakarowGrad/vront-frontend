@@ -126,6 +126,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // SECURITY: admin pages must never be served from cache —
+  // otherwise the browser back button can restore the admin UI after logout.
+  if (url.pathname.startsWith('/admin')) {
+    return;
+  }
+
   // Static pages: cache-first
   event.respondWith(
     caches.match(request).then((cached) => {
@@ -258,6 +264,15 @@ self.addEventListener('message', (event) => {
     getPendingOrdersFromDB().then((orders) => {
       event.ports[0]?.postMessage({ count: orders.length });
     });
+  }
+  if (event.data?.type === 'CLEAR_CACHES') {
+    event.waitUntil(
+      caches.keys().then((keys) =>
+        Promise.all(keys.map((k) => caches.delete(k)))
+      ).then(() => {
+        event.ports[0]?.postMessage({ success: true });
+      })
+    );
   }
 });
 

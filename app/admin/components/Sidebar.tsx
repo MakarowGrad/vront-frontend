@@ -68,8 +68,20 @@ export function Sidebar({ onClose }: SidebarProps) {
     try {
       await apiFetch('/admin/logout', { method: 'POST' });
     } catch {
-      // ignore network errors on logout
+      // ignore network errors on logout — we'll still wipe client state below
     }
+
+    // Wipe any locally cached admin pages/assets so the browser back button
+    // cannot restore the admin UI after logout.
+    try {
+      if (typeof navigator !== 'undefined' && navigator.serviceWorker?.controller) {
+        const channel = new MessageChannel();
+        navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_CACHES' }, [channel.port2]);
+      }
+    } catch {
+      // ignore SW errors
+    }
+
     clearAccessToken();
     queryClient.clear();
     window.location.href = '/admin/login';
