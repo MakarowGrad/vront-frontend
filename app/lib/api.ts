@@ -36,24 +36,52 @@ export { API_BASE };
 let accessToken: string | null = null;
 let refreshPromise: Promise<void> | null = null;
 
+const ADMIN_TOKEN_KEY = 'admin_access_token';
+
 export const getApiBase = (): string => API_BASE;
 
-// SECURITY-FIX-LS-001+AUTH-002: Do NOT store access token in JS-accessible storage.
-// The backend sets an httpOnly Secure cookie instead. We keep a memory copy only
-// for immediate Bearer-header use until the cookie round-trip happens.
+// Store access token in memory for the current session and in localStorage as a
+// fallback. The localStorage copy lets the admin panel survive page reloads on
+// devices/browsers that block third-party cookies (e.g., Safari iOS), where the
+// backend's httpOnly refresh cookie cannot be used.
 export const setAccessToken = (token: string | null): void => {
   accessToken = token;
+  if (typeof window !== 'undefined') {
+    try {
+      if (token) {
+        window.localStorage.setItem(ADMIN_TOKEN_KEY, token);
+      } else {
+        window.localStorage.removeItem(ADMIN_TOKEN_KEY);
+      }
+    } catch {
+      // ignore storage errors (private mode, etc.)
+    }
+  }
 };
 
 export const getAccessToken = (): string | null => {
   if (accessToken) {
     return accessToken;
   }
+  if (typeof window !== 'undefined') {
+    try {
+      return window.localStorage.getItem(ADMIN_TOKEN_KEY);
+    } catch {
+      return null;
+    }
+  }
   return null;
 };
 
 export const clearAccessToken = (): void => {
   accessToken = null;
+  if (typeof window !== 'undefined') {
+    try {
+      window.localStorage.removeItem(ADMIN_TOKEN_KEY);
+    } catch {
+      // ignore
+    }
+  }
 };
 
 // Normalize HeadersInit to plain Record<string, string>
