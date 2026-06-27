@@ -60,6 +60,13 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests (except sync handled separately)
   if (request.method !== 'GET') return;
 
+  // SECURITY-FIX-SW-005: Let the browser handle cross-origin resources directly.
+  // Explicit fetch() inside the SW for cross-origin CORS requests hangs in Chrome
+  // on this setup, causing an empty menu and missing dishes.
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
   // Next.js static chunks: stale-while-revalidate
   if (url.pathname.startsWith('/_next/static/')) {
     event.respondWith(
