@@ -94,34 +94,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // API catalog/dishes: network-first with cache fallback (for offline menu)
-  if (url.pathname.startsWith('/api/catalog/dishes') || url.pathname.startsWith('/api/catalog/categories')) {
-    event.respondWith(
-      fetch(request)
-        .then((res) => {
-          if (isCacheableResponse(res)) {
-            const clone = res.clone();
-            caches.open(API_CACHE).then((cache) => cache.put(request, clone));
-          }
-          return res;
-        })
-        .catch(() => caches.match(request).then((cached) => {
-          if (cached) return cached;
-          // Fallback empty response for catalog
-          if (url.pathname.includes('/dishes')) {
-            return new Response(JSON.stringify({ data: [] }), {
-              headers: { 'Content-Type': 'application/json' }
-            });
-          }
-          return new Response(JSON.stringify({ data: [] }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-        }))
-    );
-    return;
-  }
-
-  // Other API: network-only (don't cache admin/auth)
+  // API: network-only (don't cache — SW fetch of cross-origin CORS responses was
+  // hanging in Chrome; let the browser handle catalog/admin/auth directly)
   if (url.pathname.startsWith('/api/')) {
     return;
   }
