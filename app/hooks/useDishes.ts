@@ -28,7 +28,8 @@ async function fetchDishes(filters?: DishFilters): Promise<Dish[]> {
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    // Dishes endpoint can be slow on cold start; give it more time before aborting.
+    const timeout = setTimeout(() => controller.abort(), 30000);
     const response = await fetch(`${API_BASE}/catalog/dishes?${params.toString()}`, {
       mode: 'cors',
       signal: controller.signal,
