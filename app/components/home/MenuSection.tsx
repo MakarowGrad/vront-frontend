@@ -9,15 +9,17 @@ import React from "react";
 import Link from "next/link";
 import { DishCard } from "@/app/components/dish/DishCard";
 import { useCategories } from "@/app/hooks/useCategories";
-import { useDishes, useHitDishes, useNewDishes } from "@/app/hooks/useDishes";
+import { useDishes } from "@/app/hooks/useDishes";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 
 export const MenuSection: React.FC = () => {
   const { data: categories = [] } = useCategories();
-  const { data: hitDishes = [] } = useHitDishes();
-  const { data: newDishes = [] } = useNewDishes();
-  const { data: allDishes = [] } = useDishes({ limit: 4 });
+  // Single dishes request instead of 3 parallel ones (hit/new/all) to avoid
+  // browser connection/timeouts issues with the backend.
+  const { data: allDishes = [] } = useDishes({ limit: 100 });
+  const hitDishes = allDishes.filter((dish) => dish.isHit);
+  const newDishes = allDishes.filter((dish) => dish.isNew);
 
   // Only active categories with dishes
   const activeCategories = categories
