@@ -110,6 +110,8 @@ export function useCategories() {
     queryKey: [CATEGORIES_KEY],
     queryFn: fetchCategories,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 2,
+    retryDelay: 1000,
   });
 }
 

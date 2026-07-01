@@ -48,6 +48,7 @@ export const MenuSection: React.FC = () => {
                 <li key={category.id}>
                   <Link
                     href={`/catalog?category=${category.slug}`}
+                    prefetch={false}
                     className={cn(
                       "block w-full px-3 py-3 rounded-xl",
                       "bg-surface-secondary border-2 border-border",
@@ -90,6 +91,7 @@ export const MenuSection: React.FC = () => {
         <div className="mt-5 flex justify-center">
           <Link
             href="/catalog"
+            prefetch={false}
             className={cn(
               "inline-flex items-center gap-1 px-5 py-3 rounded-xl",
               "bg-gold text-background-primary font-semibold",

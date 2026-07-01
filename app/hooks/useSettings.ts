@@ -48,6 +48,8 @@ export function useSettings() {
     queryKey: [SETTINGS_KEY],
     queryFn: fetchSettings,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 2,
+    retryDelay: 1000,
   });
 }
 

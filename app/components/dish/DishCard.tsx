@@ -146,6 +146,8 @@ export function DishCard({
               fill
               className="object-cover"
               unoptimized
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             
@@ -239,6 +241,8 @@ export function DishCard({
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             unoptimized
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           

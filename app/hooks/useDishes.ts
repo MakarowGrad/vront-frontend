@@ -131,6 +131,8 @@ export function useDishes(filters?: DishFilters) {
     queryFn: () => fetchDishes(filters),
     staleTime: 0,
     refetchOnMount: 'always',
+    retry: 2,
+    retryDelay: 1000,
   });
 }
 

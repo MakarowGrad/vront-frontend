@@ -189,6 +189,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className="flex items-center justify-between p-4 border-b border-border">
           <Link
             href="/"
+            prefetch={false}
             className="flex items-center gap-2"
             onClick={onClose}
           >
@@ -218,6 +219,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     onClick={onClose}
                     className="flex items-center gap-3 p-3 rounded-xl text-text-primary hover:bg-surface-secondary transition-colors group"
                   >
@@ -242,6 +244,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/favorites"
+                prefetch={false}
                 onClick={onClose}
                 className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary text-text-primary hover:bg-surface-hover transition-colors"
               >
@@ -273,6 +276,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     onClick={onClose}
                     className="flex items-center justify-between p-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-surface-secondary transition-colors group"
                   >

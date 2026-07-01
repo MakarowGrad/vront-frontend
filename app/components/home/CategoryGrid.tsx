@@ -89,6 +89,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, index }) => {
   return (
     <Link
       href={`/catalog?category=${category.slug}`}
+      prefetch={false}
       className={cn(
         "group relative flex flex-col items-center p-6 lg:p-8",
         "bg-surface-secondary rounded-2xl border border-border",

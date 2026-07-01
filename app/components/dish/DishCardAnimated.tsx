@@ -218,6 +218,8 @@ export function DishCardAnimated({ dish, className }: DishCardAnimatedProps) {
               src={getImageUrl(dish.coverImage)}
               alt={dish.title}
               fill
+              loading="lazy"
+              decoding="async"
               className={cn(
                 'object-cover transition-transform duration-500',
                 !isActive && 'group-hover:scale-105'
@@ -338,6 +340,8 @@ export function DishCardAnimated({ dish, className }: DishCardAnimatedProps) {
                 src={getImageUrl(dish.coverImage)}
                 alt={dish.title}
                 fill
+                loading="lazy"
+                decoding="async"
                 className="object-cover"
               />
             </div>

@@ -95,6 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Logo */}
           <Link 
             href="/" 
+            prefetch={false}
             className="font-serif text-base text-text-primary flex items-center gap-1.5"
           >
             В СВОЕЙ ТАРЕЛКЕ
@@ -138,6 +139,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Favorites */}
             <Link
               href="/favorites"
+              prefetch={false}
               className="w-9 h-9 flex items-center justify-center rounded-full text-text-secondary hover:text-gold hover:bg-surface transition-all relative"
             >
               <Heart className="w-4 h-4" />
@@ -165,6 +167,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Account */}
             <Link
               href={mounted && isLoggedIn ? "/orders" : "/login"}
+              prefetch={false}
               className="w-9 h-9 flex items-center justify-center rounded-full text-text-secondary hover:text-gold hover:bg-surface transition-all relative"
             >
               <User className="w-4 h-4" />

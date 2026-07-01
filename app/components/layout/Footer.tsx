@@ -24,22 +24,22 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
       <div className="max-w-[900px] mx-auto px-4 py-4">
         {/* Navigation Links */}
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mb-3 text-xs">
-          <Link href="/catalog" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/catalog" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Меню
           </Link>
-          <Link href="/favorites" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/favorites" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Избранное
           </Link>
-          <Link href="/orders" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/orders" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Заказы
           </Link>
-          <Link href="/about" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/about" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Обо мне
           </Link>
-          <Link href="/contacts" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/contacts" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Контакты
           </Link>
-          <Link href="/admin/login" className="text-text-secondary hover:text-gold transition-colors">
+          <Link href="/admin/login" prefetch={false} className="text-text-secondary hover:text-gold transition-colors">
             Админ
           </Link>
         </div>
